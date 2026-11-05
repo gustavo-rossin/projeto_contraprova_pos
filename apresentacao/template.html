@@ -112,6 +112,11 @@ h2 { font-family: var(--f-display); font-variation-settings: "wdth" 88; font-wei
 /* ---------- tabelas ---------- */
 .tbl-wrap { overflow-x: auto; min-width: 0; }
 .slide.rolavel { display: flex; flex-direction: column; }
+#r9 { table-layout: fixed; }
+#r9 th { white-space: normal; vertical-align: bottom; line-height: 1.3; }
+#r9 th.n, #r9 td.n { padding-left: 14px; }
+#r9 td.n .sub2 { font-family: var(--f-body); }
+#r9 td:first-child, #r9 td:nth-child(2) { overflow-wrap: anywhere; }
 .slide.rolavel > * { flex-shrink: 0; }
 table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
 th { text-align: left; font: 600 11px var(--f-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 0 10px 8px 0; border-bottom: 2px solid var(--ink); white-space: nowrap; }
@@ -346,7 +351,8 @@ body.flow .cover { gap: 28px; }
   <h2>Um tripé de <mark>{{tripe}}</mark> entre {{r9_itens}} itens com preço dez vezes acima do comum</h2>
   <div class="tbl-wrap">
     <table id="r9">
-      <thead><tr><th>Item · emitente</th><th>Órgão</th><th class="n">Qtd</th><th class="n">Unitário</th><th class="n">Mediana similar</th><th class="n">×</th><th class="n">Excesso estimado</th></tr></thead>
+      <colgroup><col style="width:27%"><col style="width:17%"><col style="width:9%"><col style="width:13%"><col style="width:13%"><col style="width:10%"><col style="width:11%"></colgroup>
+      <thead><tr><th>Item · emitente</th><th>Órgão</th><th class="n">Quantidade</th><th class="n">Preço unitário</th><th class="n">Mediana de itens similares</th><th class="n">Vezes a mediana</th><th class="n">Excesso estimado</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -590,10 +596,23 @@ bars(document.getElementById("inter"), D.por_uf.filter(u => u.valor_emit >= 1e9)
 
 
 /* ---------- R9 ---------- */
+const UNIDADES = {
+  unidade: ["UNIDAD", "UNIDADE", "UNID", "UND", "UN", "UNI", "UM", "EA", "U"], peça: ["PEÇA", "PECA", "PEÇ", "PEC", "PC", "PÇ"],
+  metro: ["METRO", "MT", "M"], kit: ["KIT", "KT"], caixa: ["CX", "CAIXA"], kg: ["KG"], frasco: ["FR", "FA", "FRASCO"],
+  pacote: ["PCT", "PACOTE"], litro: ["L", "LT", "LITRO"], "m²": ["M2"], "m³": ["M3"], teste: ["TST", "TS", "TESTE"],
+  envelope: ["ENV"], conjunto: ["CJ", "CONJ"], comprimido: ["CP", "COMP", "CPR"], exemplar: ["EX"], ampola: ["AMP"],
+};
+const PLURAL = { unidade: "unidades", peça: "peças", metro: "metros", kit: "kits", caixa: "caixas", frasco: "frascos", pacote: "pacotes", litro: "litros", teste: "testes", envelope: "envelopes", conjunto: "conjuntos", comprimido: "comprimidos", exemplar: "exemplares", ampola: "ampolas" };
+function unidade(raw, qtd) {
+  const u = String(raw || "").trim().toUpperCase();
+  const nome = Object.keys(UNIDADES).find(k => UNIDADES[k].includes(u));
+  if (!nome) return u.toLowerCase();
+  return qtd === 1 ? nome : (PLURAL[nome] || nome);
+}
 document.querySelector("#r9 tbody").innerHTML = D.top_r9.slice(0, 6).map(r => `<tr>
   <td>${esc(r.produto)}<span class="sub2">${esc(r.emitente)} · ${r.uf}${r.notas > 1 ? ` · ${r.notas} notas` : ""}</span></td>
   <td>${esc(r.orgao)}</td>
-  <td class="n num">${nf0.format(r.qtd)} ${esc(r.unid.slice(0, 5).toLowerCase())}</td>
+  <td class="n num">${nf0.format(r.qtd)}<span class="sub2">${esc(unidade(r.unid, r.qtd))}</span></td>
   <td class="n num">${brlFull(r.vunit)}</td>
   <td class="n num">${brlFull(r.mediana)}</td>
   <td class="n num"><span class="chip alert">${nf0.format(r.razao)}×</span></td>

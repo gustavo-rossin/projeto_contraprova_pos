@@ -150,6 +150,20 @@ const TD = (t, o = {}) => ({ text: t, options: { fontSize: 12, color: HEX.ink, b
 const TDN = (t, o = {}) => TD(t, { fontFace: MONO, fontSize: 11, align: "right", ...o });
 const TD2 = (main, sub) => ({ text: [{ text: main, options: { fontSize: 12, color: HEX.ink, breakLine: true } }, { text: sub, options: { fontSize: 10, color: HEX.muted } }], options: { border: BORDER, valign: "top" } });
 
+const UNIDADES = {
+  unidade: ["UNIDAD", "UNIDADE", "UNID", "UND", "UN", "UNI", "UM", "EA", "U"], peça: ["PEÇA", "PECA", "PEÇ", "PEC", "PC", "PÇ"],
+  metro: ["METRO", "MT", "M"], kit: ["KIT", "KT"], caixa: ["CX", "CAIXA"], kg: ["KG"], frasco: ["FR", "FA", "FRASCO"],
+  pacote: ["PCT", "PACOTE"], litro: ["L", "LT", "LITRO"], "m²": ["M2"], "m³": ["M3"], teste: ["TST", "TS", "TESTE"],
+  envelope: ["ENV"], conjunto: ["CJ", "CONJ"], comprimido: ["CP", "COMP", "CPR"], exemplar: ["EX"], ampola: ["AMP"],
+};
+const PLURAL = { unidade: "unidades", peça: "peças", metro: "metros", kit: "kits", caixa: "caixas", frasco: "frascos", pacote: "pacotes", litro: "litros", teste: "testes", envelope: "envelopes", conjunto: "conjuntos", comprimido: "comprimidos", exemplar: "exemplares", ampola: "ampolas" };
+function unidade(raw, qtd) {
+  const u = String(raw || "").trim().toUpperCase();
+  const nome = Object.keys(UNIDADES).find(k => UNIDADES[k].includes(u));
+  if (!nome) return u.toLowerCase();
+  return qtd === 1 ? nome : (PLURAL[nome] || nome);
+}
+
 // =================================================================== slides
 // 1. Capa
 {
@@ -226,7 +240,7 @@ const TD2 = (main, sub) => ({ text: [{ text: main, options: { fontSize: 12, colo
     { text: " aparecem duplicadas, idênticas, nos CSVs mensais. Foram removidas antes de qualquer cálculo." }], X2, 3.5, W2, 1.0, "Nota duplicadas");
   nota(s, "CPFs de emitentes chegam mascarados pelo portal (***.123.456-**) e continuam mascarados aqui.", X2, 4.65, W2, 0.75, "Nota CPF");
   nota(s, [{ text: "Nota sinalizada: ", options: { bold: true, color: HEX.ink } }, { text: "nota que caiu em pelo menos uma checagem de divergência (valor × itens, preço unitário, chave de acesso, CFOP, datas, duplicidade ou publicação incompleta). Precisa ser conferida, não é necessariamente irregular." }], MX, 5.4, 5.95, 1.2, "Definição nota sinalizada");
-  legenda(s, `Fonte: Portal da Transparência, NF-e modelo 55, arquivos ${D.periodo.inicio} a ${D.periodo.fim}. Processamento em Python (pandas).`, MX, 6.8, 9, 0.25);
+  legenda(s, `Fonte: Portal da Transparência, NF-e modelo 55, arquivos ${D.periodo.inicio} a ${D.periodo.fim}.`, MX, 6.8, 9, 0.25);
 }
 
 // 3 e 4. Mapas
@@ -305,12 +319,12 @@ pres.addSection({ title: "Produção estadual" });
   rotulo(s, "Preço unitário fora da curva");
   const tripe = D.top_r9.find(r => r.produto.trim().toUpperCase().startsWith("TRIPE"));
   s.addText([{ text: "Um tripé de " }, { text: brl(tripe.vunit), options: { highlight: HEX.mark } }, { text: ` entre ${n0(D.r9_itens)} itens com preço dez vezes acima do comum` }], { placeholder: "title" });
-  const rows = [[TH("ITEM · EMITENTE"), TH("ÓRGÃO"), THR("QTD"), THR("UNITÁRIO"), THR("MEDIANA SIMILAR"), THR("×"), THR("EXCESSO")]];
+  const rows = [[TH("ITEM · EMITENTE"), TH("ÓRGÃO"), THR("QUANTIDADE"), THR("PREÇO UNITÁRIO"), THR("MEDIANA SIMILAR"), THR("VEZES A MEDIANA"), THR("EXCESSO")]];
   D.top_r9.slice(0, 6).forEach(r => rows.push([
     TD2(r.produto, `${r.emitente} · ${r.uf}${r.notas > 1 ? ` · ${r.notas} notas` : ""}`), TD(r.orgao, { fontSize: 11 }),
-    TDN(`${n0(r.qtd)} ${r.unid.slice(0, 5).toLowerCase()}`), TDN("R$ " + fmt(r.vunit, 2)), TDN("R$ " + fmt(r.mediana, 2)),
+    TDN(`${n0(r.qtd)} ${unidade(r.unid, r.qtd)}`), TDN("R$ " + fmt(r.vunit, 2)), TDN("R$ " + fmt(r.mediana, 2)),
     TDN(n0(r.razao) + "×", { color: HEX.alert, bold: true }), TDN(brl(r.excesso))]));
-  s.addTable(rows, { x: MX, y: 2.1, w: CW, colW: [3.35, 1.95, 1.25, 1.85, 1.6, 0.95, 1.18], fontFace: "Arial", margin: [0.05, 0.08, 0.05, 0], objectName: "Tabela preços atípicos" });
+  s.addTable(rows, { x: MX, y: 2.1, w: CW, colW: [3.15, 1.85, 1.45, 1.85, 1.6, 1.05, 1.18], fontFace: "Arial", margin: [0.05, 0.08, 0.05, 0], objectName: "Tabela preços atípicos" });
   legenda(s, `Item comparado com a mediana de itens do mesmo NCM, mesma unidade e mesma palavra inicial da descrição (mínimo de 30 itens). Excesso somado dos ${n0(D.r9_itens)} itens: ${brl(D.r9_excesso)}. Parte provavelmente é erro de unidade ou de digitação.`, MX, 6.55, CW, 0.5);
 }
 
