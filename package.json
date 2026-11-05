@@ -1,0 +1,13 @@
+{
+  "name": "contraprova-nfe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gera a versão PowerPoint da apresentação Contraprova NF-e",
+  "scripts": {
+    "pptx": "node apresentacao/montar_pptx.js dados/resumo.json dados/mapa.json apresentacao/contraprova_nfe.pptx"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "pptxgenjs": "^4.0.1"
+  }
+}

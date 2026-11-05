@@ -1,0 +1,947 @@
+{
+ "periodo": {
+  "inicio": "202601",
+  "fim": "202610"
+ },
+ "totais": {
+  "notas": 1311245,
+  "itens": 4885929,
+  "valor": 65869164672.520004,
+  "fornecedores": 104013,
+  "orgaos": 215,
+  "notas_divergentes": 70218,
+  "valor_divergente": 10751309386.329998,
+  "ticket_mediano": 1495.51,
+  "multi_regra": 4298
+ },
+ "regras": [
+  {
+   "id": "R1_cabecalho_x_itens",
+   "descricao": "Valor da nota fora da faixa 0,75–1,35× a soma dos itens",
+   "notas": 27460,
+   "valor": 6315084847.42,
+   "pct_notas": 0.02094192923519251
+  },
+  {
+   "id": "R2_qtd_x_unitario",
+   "descricao": "Item com quantidade × valor unitário ≠ valor total",
+   "notas": 0,
+   "valor": 0.0,
+   "pct_notas": 0.0
+  },
+  {
+   "id": "R3_chave_inconsistente",
+   "descricao": "Chave de acesso não confere com UF, CNPJ, série, número, data ou DV",
+   "notas": 491,
+   "valor": 3935467.8100000005,
+   "pct_notas": 0.000374453286761818
+  },
+  {
+   "id": "R4_duplicidade",
+   "descricao": "Mesma série/número do emitente em chaves diferentes",
+   "notas": 8,
+   "valor": 392253.71,
+   "pct_notas": 6.1010718820662805e-06
+  },
+  {
+   "id": "R5_cfop_destino",
+   "descricao": "CFOP ou UFs incompatíveis com o destino declarado (exceto venda presencial)",
+   "notas": 27453,
+   "valor": 909862698.7,
+   "pct_notas": 0.0209365907972957
+  },
+  {
+   "id": "R6_zerada_sem_itens",
+   "descricao": "Nota com valor zero ou sem itens publicados",
+   "notas": 1888,
+   "valor": 57629728.39,
+   "pct_notas": 0.0014398529641676421
+  },
+  {
+   "id": "R7_sem_autorizacao",
+   "descricao": "Sem evento de Autorização de Uso registrado",
+   "notas": 1841,
+   "valor": 146933003.97999996,
+   "pct_notas": 0.0014040091668605027
+  },
+  {
+   "id": "R8_evento_antes_emissao",
+   "descricao": "Evento registrado antes da data de emissão",
+   "notas": 5898,
+   "valor": 172733390.78,
+   "pct_notas": 0.004498015245053365
+  },
+  {
+   "id": "R9_preco_atipico",
+   "descricao": "Item ≥10× a mediana de itens similares e excesso ≥ R$10 mil",
+   "notas": 9611,
+   "valor": 3337420587.44,
+   "pct_notas": 0.007329675232317378
+  }
+ ],
+ "r3_motivos": {
+  "uf": 491
+ },
+ "por_uf": [
+  {
+   "uf": "AC",
+   "notas_emit": 8915,
+   "valor_emit": 51830560.93,
+   "notas_dest": 6084,
+   "valor_dest": 146963061.22,
+   "divergentes": 1193,
+   "valor_divergente": 16356548.780000001,
+   "taxa_div": 0.13381940549635446,
+   "fornecedores": 1784,
+   "interestadual_pct": 0.5602916432978127
+  },
+  {
+   "uf": "AL",
+   "notas_emit": 8557,
+   "valor_emit": 54107121.760000005,
+   "notas_dest": 6635,
+   "valor_dest": 69811554.41,
+   "divergentes": 608,
+   "valor_divergente": 2851084.0,
+   "taxa_div": 0.07105293911417553,
+   "fornecedores": 2047,
+   "interestadual_pct": 0.6227649877293444
+  },
+  {
+   "uf": "AM",
+   "notas_emit": 27689,
+   "valor_emit": 453126506.12,
+   "notas_dest": 30542,
+   "valor_dest": 548477380.1700001,
+   "divergentes": 2166,
+   "valor_divergente": 25951466.740000002,
+   "taxa_div": 0.07822601032901152,
+   "fornecedores": 2563,
+   "interestadual_pct": 0.3025389143703276
+  },
+  {
+   "uf": "AP",
+   "notas_emit": 4654,
+   "valor_emit": 30998371.58,
+   "notas_dest": 3876,
+   "valor_dest": 51419587.97,
+   "divergentes": 148,
+   "valor_divergente": 1630302.1799999997,
+   "taxa_div": 0.03180060163300387,
+   "fornecedores": 1065,
+   "interestadual_pct": 0.5249247958745166
+  },
+  {
+   "uf": "BA",
+   "notas_emit": 39342,
+   "valor_emit": 443524579.24,
+   "notas_dest": 40115,
+   "valor_dest": 506499726.41999996,
+   "divergentes": 1196,
+   "valor_divergente": 63093456.510000005,
+   "taxa_div": 0.030400081338010268,
+   "fornecedores": 6030,
+   "interestadual_pct": 0.48464745056174063
+  },
+  {
+   "uf": "CE",
+   "notas_emit": 21970,
+   "valor_emit": 387731557.3,
+   "notas_dest": 18657,
+   "valor_dest": 349178486.39,
+   "divergentes": 747,
+   "valor_divergente": 24617860.509999998,
+   "taxa_div": 0.03400091033227128,
+   "fornecedores": 2965,
+   "interestadual_pct": 0.5436504324078288
+  },
+  {
+   "uf": "DF",
+   "notas_emit": 56734,
+   "valor_emit": 1370490709.41,
+   "notas_dest": 140634,
+   "valor_dest": 11132808888.93,
+   "divergentes": 4916,
+   "valor_divergente": 284896497.40999997,
+   "taxa_div": 0.08664998061127366,
+   "fornecedores": 2758,
+   "interestadual_pct": 0.398262065075616
+  },
+  {
+   "uf": "ES",
+   "notas_emit": 24417,
+   "valor_emit": 768741113.87,
+   "notas_dest": 27380,
+   "valor_dest": 14908325239.27,
+   "divergentes": 1420,
+   "valor_divergente": 54433183.76,
+   "taxa_div": 0.05815620264569767,
+   "fornecedores": 1979,
+   "interestadual_pct": 0.7838800835483475
+  },
+  {
+   "uf": "GO",
+   "notas_emit": 34400,
+   "valor_emit": 4315979367.71,
+   "notas_dest": 26261,
+   "valor_dest": 321527043.77,
+   "divergentes": 1269,
+   "valor_divergente": 2842141642.0,
+   "taxa_div": 0.03688953488372093,
+   "fornecedores": 3004,
+   "interestadual_pct": 0.6039825581395348
+  },
+  {
+   "uf": "MA",
+   "notas_emit": 13693,
+   "valor_emit": 81647113.27000001,
+   "notas_dest": 9463,
+   "valor_dest": 135133324.26999998,
+   "divergentes": 368,
+   "valor_divergente": 10239525.57,
+   "taxa_div": 0.026875045643759584,
+   "fornecedores": 2897,
+   "interestadual_pct": 0.5683195793471116
+  },
+  {
+   "uf": "MG",
+   "notas_emit": 101333,
+   "valor_emit": 6553265507.24,
+   "notas_dest": 178212,
+   "valor_dest": 1696658804.53,
+   "divergentes": 4974,
+   "valor_divergente": 1923062729.4099998,
+   "taxa_div": 0.049085687781867705,
+   "fornecedores": 9786,
+   "interestadual_pct": 0.4523403037509992
+  },
+  {
+   "uf": "MS",
+   "notas_emit": 28152,
+   "valor_emit": 337639940.44,
+   "notas_dest": 33671,
+   "valor_dest": 530190102.76,
+   "divergentes": 1481,
+   "valor_divergente": 71162913.93,
+   "taxa_div": 0.05260727479397556,
+   "fornecedores": 2563,
+   "interestadual_pct": 0.35475277067348676
+  },
+  {
+   "uf": "MT",
+   "notas_emit": 32182,
+   "valor_emit": 230191353.32,
+   "notas_dest": 31768,
+   "valor_dest": 185605179.88,
+   "divergentes": 1303,
+   "valor_divergente": 95817622.30999999,
+   "taxa_div": 0.04048847181654341,
+   "fornecedores": 2128,
+   "interestadual_pct": 0.25417935491889876
+  },
+  {
+   "uf": "PA",
+   "notas_emit": 32531,
+   "valor_emit": 289637989.6,
+   "notas_dest": 40548,
+   "valor_dest": 596097669.94,
+   "divergentes": 880,
+   "valor_divergente": 12065889.530000001,
+   "taxa_div": 0.02705112046970582,
+   "fornecedores": 4860,
+   "interestadual_pct": 0.35317082167778424
+  },
+  {
+   "uf": "PB",
+   "notas_emit": 18619,
+   "valor_emit": 238387973.29999998,
+   "notas_dest": 16224,
+   "valor_dest": 199518624.28999996,
+   "divergentes": 539,
+   "valor_divergente": 38625212.04000001,
+   "taxa_div": 0.02894892314302594,
+   "fornecedores": 2564,
+   "interestadual_pct": 0.5759707825339707
+  },
+  {
+   "uf": "PE",
+   "notas_emit": 43649,
+   "valor_emit": 3244602081.5999994,
+   "notas_dest": 43187,
+   "valor_dest": 446952804.69,
+   "divergentes": 751,
+   "valor_divergente": 37267073.5,
+   "taxa_div": 0.017205434259662308,
+   "fornecedores": 3605,
+   "interestadual_pct": 0.39803890123485075
+  },
+  {
+   "uf": "PI",
+   "notas_emit": 12788,
+   "valor_emit": 63341891.739999995,
+   "notas_dest": 13162,
+   "valor_dest": 126589289.63,
+   "divergentes": 390,
+   "valor_divergente": 2736141.8600000003,
+   "taxa_div": 0.03049734125742884,
+   "fornecedores": 3572,
+   "interestadual_pct": 0.41796997184860807
+  },
+  {
+   "uf": "PR",
+   "notas_emit": 80109,
+   "valor_emit": 1825093648.9,
+   "notas_dest": 55238,
+   "valor_dest": 840539697.65,
+   "divergentes": 3065,
+   "valor_divergente": 63010833.03,
+   "taxa_div": 0.03826037024554045,
+   "fornecedores": 7003,
+   "interestadual_pct": 0.6346602753748019
+  },
+  {
+   "uf": "RJ",
+   "notas_emit": 236502,
+   "valor_emit": 16571833891.66,
+   "notas_dest": 264477,
+   "valor_dest": 17349547634.71,
+   "divergentes": 18793,
+   "valor_divergente": 1257637748.04,
+   "taxa_div": 0.07946233012828643,
+   "fornecedores": 7194,
+   "interestadual_pct": 0.28138874089859706
+  },
+  {
+   "uf": "RN",
+   "notas_emit": 27837,
+   "valor_emit": 120183077.09,
+   "notas_dest": 35834,
+   "valor_dest": 366286628.9,
+   "divergentes": 2670,
+   "valor_divergente": 9634472.32,
+   "taxa_div": 0.09591550813665266,
+   "fornecedores": 1230,
+   "interestadual_pct": 0.17839566045191652
+  },
+  {
+   "uf": "RO",
+   "notas_emit": 18761,
+   "valor_emit": 125674340.39999999,
+   "notas_dest": 17431,
+   "valor_dest": 145785815.49,
+   "divergentes": 319,
+   "valor_divergente": 3752883.1199999996,
+   "taxa_div": 0.01700335802995576,
+   "fornecedores": 2852,
+   "interestadual_pct": 0.3556846649965354
+  },
+  {
+   "uf": "RR",
+   "notas_emit": 7585,
+   "valor_emit": 81667440.61,
+   "notas_dest": 9047,
+   "valor_dest": 167934762.15,
+   "divergentes": 482,
+   "valor_divergente": 7266468.890000001,
+   "taxa_div": 0.06354647330257086,
+   "fornecedores": 418,
+   "interestadual_pct": 0.3704680290046144
+  },
+  {
+   "uf": "RS",
+   "notas_emit": 117479,
+   "valor_emit": 1951302930.15,
+   "notas_dest": 119068,
+   "valor_dest": 1777505047.36,
+   "divergentes": 7706,
+   "valor_divergente": 128267398.58,
+   "taxa_div": 0.0655947020318525,
+   "fornecedores": 6944,
+   "interestadual_pct": 0.3583534078431039
+  },
+  {
+   "uf": "SC",
+   "notas_emit": 67133,
+   "valor_emit": 2049130274.5,
+   "notas_dest": 38730,
+   "valor_dest": 228005415.87,
+   "divergentes": 2017,
+   "valor_divergente": 498185389.87,
+   "taxa_div": 0.030044836369594687,
+   "fornecedores": 5137,
+   "interestadual_pct": 0.675360850848316
+  },
+  {
+   "uf": "SE",
+   "notas_emit": 4381,
+   "valor_emit": 41683784.85,
+   "notas_dest": 4960,
+   "valor_dest": 101201381.06,
+   "divergentes": 673,
+   "valor_divergente": 3107244.5200000005,
+   "taxa_div": 0.15361789545765808,
+   "fornecedores": 880,
+   "interestadual_pct": 0.4398539146313627
+  },
+  {
+   "uf": "SP",
+   "notas_emit": 234550,
+   "valor_emit": 24130886775.59,
+   "notas_dest": 93346,
+   "valor_dest": 12880478724.83,
+   "divergentes": 9987,
+   "valor_divergente": 3271541910.8900003,
+   "taxa_div": 0.04257940737582605,
+   "fornecedores": 14859,
+   "interestadual_pct": 0.7635642720102324
+  },
+  {
+   "uf": "TO",
+   "notas_emit": 7282,
+   "valor_emit": 56464730.54,
+   "notas_dest": 6695,
+   "valor_dest": 60122795.96000001,
+   "divergentes": 156,
+   "valor_divergente": 1955847.23,
+   "taxa_div": 0.021422686075254053,
+   "fornecedores": 1774,
+   "interestadual_pct": 0.41856632793188686
+  }
+ ],
+ "mensal": [
+  {
+   "competencia": "202601",
+   "notas": 109084,
+   "valor": 5973157671.92,
+   "divergentes": 6211
+  },
+  {
+   "competencia": "202602",
+   "notas": 95328,
+   "valor": 4898849171.63,
+   "divergentes": 5240
+  },
+  {
+   "competencia": "202603",
+   "notas": 138450,
+   "valor": 12146293825.2,
+   "divergentes": 8027
+  },
+  {
+   "competencia": "202604",
+   "notas": 126758,
+   "valor": 6104797992.22,
+   "divergentes": 6642
+  },
+  {
+   "competencia": "202605",
+   "notas": 149138,
+   "valor": 7179795465.37,
+   "divergentes": 7140
+  },
+  {
+   "competencia": "202606",
+   "notas": 117211,
+   "valor": 5735407986.86,
+   "divergentes": 5740
+  },
+  {
+   "competencia": "202607",
+   "notas": 152335,
+   "valor": 5403740590.4,
+   "divergentes": 7903
+  },
+  {
+   "competencia": "202608",
+   "notas": 146357,
+   "valor": 5442776730.87,
+   "divergentes": 7571
+  },
+  {
+   "competencia": "202609",
+   "notas": 157854,
+   "valor": 7960911347.31,
+   "divergentes": 8573
+  },
+  {
+   "competencia": "202610",
+   "notas": 118730,
+   "valor": 5023433890.74,
+   "divergentes": 7171
+  }
+ ],
+ "orgaos": [
+  {
+   "orgao_sup": "Ministério da Saúde",
+   "notas": 136847,
+   "valor": 33446252384.08,
+   "divergentes": 6850
+  },
+  {
+   "orgao_sup": "Ministério da Defesa",
+   "notas": 543305,
+   "valor": 15666081562.960001,
+   "divergentes": 18224
+  },
+  {
+   "orgao_sup": "Ministério da Educação",
+   "notas": 289512,
+   "valor": 7288190405.25,
+   "divergentes": 7254
+  },
+  {
+   "orgao_sup": "Sem informação",
+   "notas": 25647,
+   "valor": 1893834207.76,
+   "divergentes": 1341
+  },
+  {
+   "orgao_sup": "Ministério da Justiça e Segurança Pública",
+   "notas": 75171,
+   "valor": 1479297314.52,
+   "divergentes": 12163
+  },
+  {
+   "orgao_sup": "Ministério da Fazenda",
+   "notas": 13780,
+   "valor": 1316835688.62,
+   "divergentes": 737
+  },
+  {
+   "orgao_sup": "Ministério da Agricultura e Pecuária",
+   "notas": 25016,
+   "valor": 1241391638.59,
+   "divergentes": 505
+  },
+  {
+   "orgao_sup": "Ministério da Integração e do Desenvolvimento Regional",
+   "notas": 3946,
+   "valor": 773980087.79,
+   "divergentes": 221
+  },
+  {
+   "orgao_sup": "Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome",
+   "notas": 103652,
+   "valor": 695483622.58,
+   "divergentes": 18839
+  },
+  {
+   "orgao_sup": "Ministério do Meio Ambiente e Mudança do Clima",
+   "notas": 12246,
+   "valor": 344173127.85,
+   "divergentes": 739
+  }
+ ],
+ "fluxo": [
+  {
+   "uf_emit": "SP",
+   "uf_dest": "ES",
+   "valor": 5991396656.26
+  },
+  {
+   "uf_emit": "SP",
+   "uf_dest": "DF",
+   "valor": 5194133168.65
+  },
+  {
+   "uf_emit": "SP",
+   "uf_dest": "RJ",
+   "valor": 4448900930.67
+  },
+  {
+   "uf_emit": "RJ",
+   "uf_dest": "SP",
+   "valor": 2304373661.89
+  },
+  {
+   "uf_emit": "GO",
+   "uf_dest": "ES",
+   "valor": 2194903019.38
+  },
+  {
+   "uf_emit": "PE",
+   "uf_dest": "ES",
+   "valor": 2160680194.64
+  },
+  {
+   "uf_emit": "MG",
+   "uf_dest": "ES",
+   "valor": 1596705191.66
+  },
+  {
+   "uf_emit": "RJ",
+   "uf_dest": "DF",
+   "valor": 1512567969.91
+  },
+  {
+   "uf_emit": "RJ",
+   "uf_dest": "ES",
+   "valor": 1304824833.74
+  },
+  {
+   "uf_emit": "MG",
+   "uf_dest": "DF",
+   "valor": 1150814517.52
+  },
+  {
+   "uf_emit": "GO",
+   "uf_dest": "SP",
+   "valor": 1121547898.77
+  },
+  {
+   "uf_emit": "MG",
+   "uf_dest": "SP",
+   "valor": 1075818632.04
+  }
+ ],
+ "top_r1": [
+  {
+   "emitente": "NOVARTIS BIOCIÊNCIAS S/A",
+   "uf": "GO",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "53152",
+   "valor": 38218060.24,
+   "soma_itens": 301910737.6,
+   "dif": -263692677.36,
+   "data": "10/03/2026"
+  },
+  {
+   "emitente": "CSL BEHRING COM DE PROD FARMAC LTDA",
+   "uf": "SP",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "16750",
+   "valor": 147589975.0,
+   "soma_itens": 372132862.65999997,
+   "dif": -224542887.65999997,
+   "data": "12/08/2026"
+  },
+  {
+   "emitente": "CSL BEHRING COM DE PROD FARMAC LTDA",
+   "uf": "SP",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "16749",
+   "valor": 147589975.0,
+   "soma_itens": 367648128.64,
+   "dif": -220058153.64,
+   "data": "11/08/2026"
+  },
+  {
+   "emitente": "CSL BEHRING COM DE PROD FARMAC LTDA",
+   "uf": "SP",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "16568",
+   "valor": 152045950.0,
+   "soma_itens": 369639682.16,
+   "dif": -217593732.16000003,
+   "data": "12/02/2026"
+  },
+  {
+   "emitente": "CSL BEHRING COM DE PROD FARMAC LTDA",
+   "uf": "SP",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "16563",
+   "valor": 152045950.0,
+   "soma_itens": 365185508.94,
+   "dif": -213139558.94,
+   "data": "10/02/2026"
+  },
+  {
+   "emitente": "PRODUTOS ROCHE QUIMICOS E FARMACEUTICOS S A",
+   "uf": "GO",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "464926",
+   "valor": 78731576.4,
+   "soma_itens": 254761234.51,
+   "dif": -176029658.10999998,
+   "data": "02/03/2026"
+  },
+  {
+   "emitente": "NOVARTIS BIOCIÊNCIAS S/A",
+   "uf": "GO",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "52093",
+   "valor": 24515246.95,
+   "soma_itens": 193662793.0,
+   "dif": -169147546.05,
+   "data": "13/01/2026"
+  },
+  {
+   "emitente": "NOVARTIS BIOCIÊNCIAS S/A",
+   "uf": "GO",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto",
+   "numero": "56215",
+   "valor": 19768587.44,
+   "soma_itens": 157930300.64000002,
+   "dif": -138161713.20000002,
+   "data": "02/09/2026"
+  }
+ ],
+ "top_r9": [
+  {
+   "produto": "REFEICOES SERVIDAS NA UFJF-GV",
+   "ncm_desc": "Outras preparações alimentícias",
+   "unid": "UNIDAD",
+   "qtd": 10026.0,
+   "vunit": 13540.0,
+   "mediana": 15.35,
+   "razao": 882.084690553746,
+   "notas": 1,
+   "excesso": 135598140.9,
+   "emitente": "DIAMANTINA BISTRO E COZINHA IND GV",
+   "uf": "MG",
+   "orgao": "Universidade Federal de Juiz de Fora"
+  },
+  {
+   "produto": "MODULO MODERNIZACAO RADAR LP23SST-NG/8-16 SSI SN: 10/25/012",
+   "ncm_desc": "Aparelhos de radiodetecção e de radiossondagem (radar)",
+   "unid": "PEÇA",
+   "qtd": 3.0,
+   "vunit": 31159398.41,
+   "mediana": 265031.37,
+   "razao": 117.56871803515185,
+   "notas": 3,
+   "excesso": 92683101.12,
+   "emitente": "OMNISYS ENGENHARIA LTDA",
+   "uf": "SP",
+   "orgao": "Comando da Aeronáutica"
+  },
+  {
+   "produto": "TRIPE",
+   "ncm_desc": "Monopés, bipés, tripés e artigos semelhantes",
+   "unid": "UNIDAD",
+   "qtd": 1.0,
+   "vunit": 87954102.0,
+   "mediana": 200.0,
+   "razao": 439770.51,
+   "notas": 1,
+   "excesso": 87953902.0,
+   "emitente": "LICITA INFORMATICA LTDA",
+   "uf": "MT",
+   "orgao": "Comando da Marinha"
+  },
+  {
+   "produto": "DILUENTE SAR CAX RUB",
+   "ncm_desc": "nan",
+   "unid": "UNIDAD",
+   "qtd": 69120.0,
+   "vunit": 1205.95,
+   "mediana": 3.81,
+   "razao": 316.5223097112861,
+   "notas": 1,
+   "excesso": 83091916.80000001,
+   "emitente": "BLUE LOGISTICA INTEGRADA S.A.",
+   "uf": "RJ",
+   "orgao": "Fundação Oswaldo Cruz"
+  },
+  {
+   "produto": "MODULO MODERNIZACAO RADAR LP23SST-NG/8-16 SSI SN 09/25/010",
+   "ncm_desc": "Aparelhos de radiodetecção e de radiossondagem (radar)",
+   "unid": "PEÇA",
+   "qtd": 2.0,
+   "vunit": 29899829.2,
+   "mediana": 265031.37,
+   "razao": 112.81618926846282,
+   "notas": 2,
+   "excesso": 59269595.66,
+   "emitente": "OMNISYS ENGENHARIA LTDA",
+   "uf": "SP",
+   "orgao": "Comando da Aeronáutica"
+  },
+  {
+   "produto": "AAD 33168  M365 E5 UNIFIED SUB PER USER",
+   "ncm_desc": "nan",
+   "unid": "UNIDAD",
+   "qtd": 16645.0,
+   "vunit": 2972.37,
+   "mediana": 174.01,
+   "razao": 17.08160450548819,
+   "notas": 1,
+   "excesso": 46578702.199999996,
+   "emitente": "BRASOFTWARE INFORMATICA LTDA",
+   "uf": "SP",
+   "orgao": "Receita Federal do Brasil"
+  },
+  {
+   "produto": "CLOR.DE FINGOLIMODE 0,5MG2BLX14CAP-LGNUP",
+   "ncm_desc": "Outros medicam.c/compostos de funcao amina,etc.em doses",
+   "unid": "UNI",
+   "qtd": 39314.0,
+   "vunit": 799.96,
+   "mediana": 8.28,
+   "razao": 96.61352657004832,
+   "notas": 25,
+   "excesso": 31124107.520000003,
+   "emitente": "EMS S/A",
+   "uf": "SP",
+   "orgao": "Ministério da Saúde - Unidades com vínculo direto"
+  },
+  {
+   "produto": "MODULO MODERNIZACAO RADAR LP23SST-NG/8-16 SSI SN 09/25/010",
+   "ncm_desc": "Aparelhos de radiodetecção e de radiossondagem (radar)",
+   "unid": "PEÇA",
+   "qtd": 1.0,
+   "vunit": 29899829.22,
+   "mediana": 265031.37,
+   "razao": 112.81618934392559,
+   "notas": 1,
+   "excesso": 29634797.849999998,
+   "emitente": "OMNISYS ENGENHARIA LTDA",
+   "uf": "SP",
+   "orgao": "Comando da Aeronáutica"
+  }
+ ],
+ "fornecedores": [
+  {
+   "emitente": "PRODUTOS ROCHE QUIMICOS E FARMACEUTICOS S A",
+   "doc": "33009945000204",
+   "uf": "GO",
+   "notas": 308,
+   "notas_total": 538,
+   "valor": 2375831018.15
+  },
+  {
+   "emitente": "CSL BEHRING COM DE PROD FARMAC LTDA",
+   "doc": "62969589001593",
+   "uf": "SP",
+   "notas": 10,
+   "notas_total": 13,
+   "valor": 978175750.0
+  },
+  {
+   "emitente": "BIOMM SA NOVA LIMA",
+   "doc": "04752991000110",
+   "uf": "MG",
+   "notas": 170,
+   "notas_total": 230,
+   "valor": 652472513.72
+  },
+  {
+   "emitente": "NOVARTIS BIOCIENCIAS S/A",
+   "doc": "56994502002779",
+   "uf": "SP",
+   "notas": 241,
+   "notas_total": 252,
+   "valor": 477476150.48
+  },
+  {
+   "emitente": "ABBVIE FARMACEUTICA LTDA",
+   "doc": "15800545000400",
+   "uf": "MG",
+   "notas": 356,
+   "notas_total": 410,
+   "valor": 428722672.43
+  },
+  {
+   "emitente": "OMNISYS ENGENHARIA LTDA",
+   "doc": "01773463000159",
+   "uf": "SP",
+   "notas": 29,
+   "notas_total": 216,
+   "valor": 419337550.24
+  },
+  {
+   "emitente": "NOVARTIS BIOCIÊNCIAS S/A",
+   "doc": "56994502002698",
+   "uf": "GO",
+   "notas": 148,
+   "notas_total": 148,
+   "valor": 389265235.87
+  },
+  {
+   "emitente": "SANOFI MEDLEY FARMACÊUTICA LTDA.",
+   "doc": "10588595001335",
+   "uf": "MG",
+   "notas": 299,
+   "notas_total": 348,
+   "valor": 333208862.83
+  },
+  {
+   "emitente": "BLUE LOGISTICA INTEGRADA S.A.",
+   "doc": "31959959000182",
+   "uf": "RJ",
+   "notas": 321,
+   "notas_total": 3839,
+   "valor": 259425940.98999998
+  },
+  {
+   "emitente": "BEAUFOUR IPSEN FARMACEUTICA LTDA.",
+   "doc": "07718721000423",
+   "uf": "SC",
+   "notas": 71,
+   "notas_total": 78,
+   "valor": 236253671.29999998
+  }
+ ],
+ "benford": {
+  "obs": [
+   0.29582,
+   0.18135,
+   0.13429,
+   0.09919,
+   0.08248,
+   0.06295,
+   0.05387,
+   0.04622,
+   0.04384
+  ],
+  "esp": [
+   0.30103,
+   0.17609,
+   0.12494,
+   0.09691,
+   0.07918,
+   0.06695,
+   0.05799,
+   0.05115,
+   0.04576
+  ],
+  "mad": 0.004483393392562783,
+  "n": 1294815
+ },
+ "r1_explicadas": {
+  "notas": 29702,
+  "valor": 3718782180.94
+ },
+ "r1_hist": [
+  {
+   "faixa": "[0.0, 0.25)",
+   "notas": 1533
+  },
+  {
+   "faixa": "[0.25, 0.5)",
+   "notas": 3227
+  },
+  {
+   "faixa": "[0.5, 0.75)",
+   "notas": 11319
+  },
+  {
+   "faixa": "[0.75, 1.0)",
+   "notas": 22220
+  },
+  {
+   "faixa": "[1.0, 1.35)",
+   "notas": 7474
+  },
+  {
+   "faixa": "[1.35, 2.0)",
+   "notas": 818
+  },
+  {
+   "faixa": "[2.0, 5.0)",
+   "notas": 195
+  },
+  {
+   "faixa": "[5.0, inf)",
+   "notas": 90
+  }
+ ],
+ "qualidade": {
+  "linhas_publicadas": 1351775,
+  "linhas_dup_notas": 40527,
+  "linhas_dup_itens": 157674,
+  "avulsas_890_899": 93002
+ },
+ "r9_itens": 14254,
+ "r9_excesso": 2083537846.9922
+}

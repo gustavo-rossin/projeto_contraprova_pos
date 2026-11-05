@@ -1,0 +1,631 @@
+<title>Contraprova NF-e 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: palco 16:9 (1280x720) escalado no desktop; abaixo de 900px os slides viram uma página corrida.
+   Identidade: papel de auditoria azul-acinzentado, tinta petróleo, marca-texto amarelo só nas divergências. */
+:root {
+  --paper: #EDF1F3; --sheet: #F8FAFB; --ink: #13212A; --ink-2: #44545F; --muted: #6E7D88; --rule: #C9D3D9;
+  --petrol: #0B6A6F; --petrol-soft: #D6E9E8; --mark: #F5C518; --mark-soft: rgba(245, 197, 24, .55);
+  --alert: #B23F2B; --alert-soft: #F3DCD6; --neutral-fill: #B9C4CB; --on-fill: #FFFFFF;
+  --q0: #DCEDEC; --q1: #A9D3D1; --q2: #6FB4B3; --q3: #3B9294; --q4: #16707A; --q5: #0A4A55;
+  --q-line: #F8FAFB;
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E161B; --sheet: #142028; --ink: #E4EBEE; --ink-2: #A8B5BD; --muted: #7D8C96; --rule: #2B3943;
+    --petrol: #52B7B3; --petrol-soft: #18363A; --mark: #E8B90F; --mark-soft: rgba(232, 185, 15, .38);
+    --alert: #E2836B; --alert-soft: #3A221D; --neutral-fill: #46545E; --on-fill: #0E161B;
+    --q0: #1A3338; --q1: #1E4E53; --q2: #236C70; --q3: #378E8E; --q4: #66B6B2; --q5: #A6DDD8;
+    --q-line: #0E161B; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E161B; --sheet: #142028; --ink: #E4EBEE; --ink-2: #A8B5BD; --muted: #7D8C96; --rule: #2B3943;
+  --petrol: #52B7B3; --petrol-soft: #18363A; --mark: #E8B90F; --mark-soft: rgba(232, 185, 15, .38);
+  --alert: #E2836B; --alert-soft: #3A221D; --neutral-fill: #46545E; --on-fill: #0E161B;
+  --q0: #1A3338; --q1: #1E4E53; --q2: #236C70; --q3: #378E8E; --q4: #66B6B2; --q5: #A6DDD8;
+  --q-line: #0E161B; color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased; overflow: hidden;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+h1, h2, h3, p { margin: 0; }
+.num, td.n, .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+mark, .hl { background: linear-gradient(transparent 52%, var(--mark-soft) 52%, var(--mark-soft) 94%, transparent 94%); color: inherit; padding: 0 .08em; }
+
+/* ---------- palco ---------- */
+#deck { position: fixed; inset: 0 0 calc(56px + env(safe-area-inset-bottom, 0px)) 0; display: grid; place-items: center; }
+.stage { width: 1280px; height: 720px; transform: scale(var(--s, 1)); transform-origin: center center; position: relative; flex: none; }
+.slide {
+  position: absolute; inset: 0; background: var(--sheet); border: 1px solid var(--rule);
+  padding: 40px 64px 44px; display: grid; grid-template-rows: auto auto 1fr; gap: 0; overflow: hidden;
+}
+.slide-top { display: flex; gap: 16px; justify-content: space-between; align-items: baseline; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-bottom: 14px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; }
+.brand { color: var(--ink); font-weight: 600; letter-spacing: .14em; }
+.brand::before { content: ""; display: inline-block; width: 10px; height: 10px; background: var(--mark); margin-right: 8px; vertical-align: 0; }
+h2 { font-family: var(--f-display); font-variation-settings: "wdth" 88; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; max-width: 1050px; margin-bottom: 22px; }
+.lede { font-size: 18px; color: var(--ink-2); max-width: 62ch; }
+.small { font-size: 13px; color: var(--muted); }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--petrol); font-weight: 600; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; min-height: 0; }
+.gmap { display: grid; grid-template-columns: 520px 1fr; gap: 40px; min-height: 0; }
+.col { display: flex; flex-direction: column; gap: 18px; min-width: 0; min-height: 0; }
+.col > * { flex-shrink: 0; }
+
+/* ---------- capa ---------- */
+.cover { background: var(--sheet); grid-template-rows: auto 1fr auto; }
+.cover h1 { font-family: var(--f-display); font-variation-settings: "wdth" 112; font-weight: 800; font-size: 96px; line-height: .92; letter-spacing: -.025em; max-width: 900px; text-wrap: balance; }
+.cover .sub { font-size: 21px; color: var(--ink-2); max-width: 46ch; margin-top: 22px; }
+.chave { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-end; }
+.seg { display: flex; flex-direction: column; gap: 6px; }
+.seg b { font-family: var(--f-mono); font-weight: 500; font-size: 24px; letter-spacing: .06em; padding: 4px 6px; border-bottom: 2px solid var(--ink); }
+.seg span { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.seg.on b { background: var(--mark-soft); border-bottom-color: var(--alert); }
+.seg.on span { color: var(--alert); font-weight: 600; }
+.chave-note { font-size: 14px; color: var(--ink-2); margin-top: 14px; }
+
+/* ---------- KPIs ---------- */
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--ink); }
+.kpi { padding: 18px 20px 20px 0; border-bottom: 1px solid var(--rule); }
+.kpi .v { white-space: nowrap; font-family: var(--f-display); font-variation-settings: "wdth" 80; font-weight: 700; font-size: 42px; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi .l { font-size: 14px; color: var(--ink-2); margin-top: 6px; }
+.kpi.big { grid-column: 1 / -1; }
+.kpi.big .v { font-size: 64px; color: var(--petrol); }
+.note { border-left: 3px solid var(--mark); padding: 4px 0 4px 14px; font-size: 14.5px; color: var(--ink-2); }
+.note strong { color: var(--ink); }
+
+/* ---------- mapa ---------- */
+.mapwrap { position: relative; min-height: 0; display: flex; flex-direction: column; gap: 10px; }
+.mapwrap svg { width: 100%; height: auto; max-height: 520px; display: block; }
+.mapwrap path { stroke: var(--q-line); stroke-width: 1; stroke-linejoin: round; cursor: pointer; transition: opacity .15s; }
+.mapwrap path:hover, .mapwrap path.sel { stroke: var(--ink); stroke-width: 2; }
+.mapwrap text { font-family: var(--f-mono); font-size: 11px; font-weight: 600; pointer-events: none; text-anchor: middle; dominant-baseline: middle; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); font-family: var(--f-mono); }
+.legend i { display: inline-block; width: 22px; height: 12px; margin-right: 6px; vertical-align: -2px; border-radius: 2px; }
+.seg-ctl { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; align-self: flex-start; }
+.seg-ctl button { font: 500 13px var(--f-body); background: transparent; color: var(--ink-2); border: 0; padding: 7px 14px; cursor: pointer; }
+.seg-ctl button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+.seg-ctl button:focus-visible, .nav button:focus-visible { outline: 2px solid var(--petrol); outline-offset: 2px; }
+
+/* ---------- barras horizontais ---------- */
+.bars { display: flex; flex-direction: column; gap: 7px; }
+.bar-row { display: grid; grid-template-columns: var(--lw, 64px) 1fr var(--vw, 104px); gap: 12px; align-items: center; font-size: 14px; }
+.bar-row .bl { color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-row .bv { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 13px; text-align: right; color: var(--ink-2); }
+.track { height: 14px; position: relative; }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--petrol); border-radius: 0 4px 4px 0; min-width: 2px; }
+.fill.alt { background: var(--alert); }
+.fill.mute { background: var(--neutral-fill); }
+.bar-row:hover .bl { text-decoration: underline; text-decoration-color: var(--mark); text-decoration-thickness: 3px; }
+
+/* ---------- tabelas ---------- */
+.tbl-wrap { overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font: 600 11px var(--f-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 0 10px 8px 0; border-bottom: 2px solid var(--ink); white-space: nowrap; }
+td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+td .sub2 { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.chip { display: inline-block; font: 600 11px var(--f-mono); letter-spacing: .04em; padding: 2px 7px; border-radius: 999px; background: var(--petrol-soft); color: var(--ink); white-space: nowrap; }
+.chip.zero { background: transparent; border: 1px solid var(--rule); color: var(--muted); }
+.chip.alert { background: var(--alert-soft); color: var(--ink); }
+.chip.alert::before { content: "▲ "; color: var(--alert); }
+.rid { font: 600 13px var(--f-mono); color: var(--petrol); }
+
+/* ---------- gráficos svg ---------- */
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .axis { font: 11px var(--f-mono); fill: var(--muted); }
+.chart .grid { stroke: var(--rule); stroke-width: 1; }
+.chart .base { stroke: var(--ink-2); stroke-width: 1; }
+.chart .lbl { font: 600 12px var(--f-mono); fill: var(--ink); }
+.chart .lbl2 { font: 11px var(--f-mono); fill: var(--ink-2); }
+.chart rect.b { fill: var(--petrol); }
+.chart rect.b.alt { fill: var(--alert); }
+.chart rect.b.mute { fill: var(--neutral-fill); }
+.chart rect.hit { fill: transparent; cursor: default; }
+.chart g.col:hover rect.b { opacity: .8; }
+.chart .exp { stroke: var(--ink); stroke-width: 2.5; }
+.chart .expdot { fill: var(--ink); stroke: var(--sheet); stroke-width: 2; }
+.key { display: flex; gap: 18px; font-size: 12.5px; color: var(--ink-2); flex-wrap: wrap; }
+.key i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.key i.line { height: 3px; width: 18px; vertical-align: 3px; background: var(--ink); }
+
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.step h3 { font-family: var(--f-display); font-variation-settings: "wdth" 90; font-size: 21px; font-weight: 700; margin: 6px 0 8px; }
+.step p { font-size: 14.5px; color: var(--ink-2); }
+.closing h1 { font-family: var(--f-display); font-variation-settings: "wdth" 112; font-weight: 800; font-size: 76px; line-height: .95; letter-spacing: -.02em; max-width: 980px; text-wrap: balance; }
+
+.prem { display: grid; grid-template-columns: 230px 1fr; border-top: 2px solid var(--ink); }
+.prem dt, .prem dd { margin: 0; padding: 11px 0; border-bottom: 1px solid var(--rule); }
+.prem dt { font-family: var(--f-display); font-variation-settings: "wdth" 90; font-weight: 700; font-size: 17px; padding-right: 20px; }
+.prem dd { font-size: 15px; color: var(--ink-2); }
+.prem dt.conf { color: var(--alert); }
+body.flow .prem { grid-template-columns: 1fr; }
+body.flow .prem dt { border-bottom: 0; padding-bottom: 2px; }
+.desc { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.desc > div { background: var(--paper); padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.desc h3 { font-family: var(--f-display); font-variation-settings: "wdth" 90; font-size: 22px; font-weight: 700; }
+.desc p { font-size: 14.5px; color: var(--ink-2); }
+.conta { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.conta .c { border-top: 2px solid var(--ink); padding-top: 8px; min-width: 150px; }
+.conta .c b { display: block; font-family: var(--f-mono); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.conta .c span { font-size: 12.5px; color: var(--muted); }
+.conta .ar { align-self: center; font-family: var(--f-mono); color: var(--muted); font-size: 18px; }
+.conta .c.res b { color: var(--petrol); }
+body.flow .desc { grid-template-columns: 1fr; }
+/* ---------- navegação ---------- */
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0; height: calc(56px + env(safe-area-inset-bottom, 0px));
+  padding: 0 max(16px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; align-items: center; gap: 14px; font-family: var(--f-mono); font-size: 13px; color: var(--ink-2);
+}
+.nav button { font: 500 13px var(--f-mono); background: var(--sheet); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 14px; cursor: pointer; }
+.nav button:hover { border-color: var(--ink-2); }
+.nav button:disabled { opacity: .4; cursor: default; }
+.progress { flex: 1; height: 3px; background: var(--rule); position: relative; border-radius: 2px; }
+.progress span { position: absolute; left: 0; top: 0; bottom: 0; background: var(--petrol); border-radius: 2px; transition: width .25s; }
+.nav .ttl { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40ch; }
+
+#tip {
+  position: fixed; z-index: 50; pointer-events: none; background: var(--ink); color: var(--sheet); font-size: 13px; line-height: 1.4;
+  padding: 8px 11px; border-radius: 6px; max-width: 280px; box-shadow: 0 6px 20px rgba(0,0,0,.18);
+}
+#tip b { font-weight: 600; }
+#tip .tm { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* ---------- modo página (telas estreitas) ---------- */
+body.flow { overflow: auto; height: auto; }
+body.flow #deck { position: static; display: block; padding-block: 16px 32px; }
+body.flow .stage { width: 100%; max-width: 100%; height: auto; transform: none; display: flex; flex-direction: column; gap: 16px; }
+body.flow .slide { position: static; display: flex; flex-direction: column; padding: 24px 18px 28px; overflow: visible; }
+body.flow .slide[hidden] { display: flex !important; }
+body.flow .nav { display: none; }
+body.flow .grid2, body.flow .gmap, body.flow .steps { grid-template-columns: 1fr; gap: 28px; }
+body.flow .kpis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; }
+body.flow .kpi .v { white-space: normal; }
+body.flow h2 { font-size: 28px; }
+body.flow .cover h1 { font-size: 52px; }
+body.flow .closing h1 { font-size: 44px; }
+body.flow .kpi .v { font-size: 34px; }
+body.flow .kpi.big .v { font-size: 42px; }
+body.flow .seg b { font-size: 16px; }
+body.flow .cover { gap: 28px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div id="deck"><div class="stage" id="stage">
+
+<!-- 1 -->
+<section class="slide cover" data-t="Capa">
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Observatório cidadão de compras públicas</span></div>
+  <div style="align-self:center">
+    <p class="eyebrow">Relatório de varredura · NF-e destinadas à União · {{periodo}}</p>
+    <h1 style="margin-top:14px">Onde as notas <mark>não fecham</mark></h1>
+    <p class="sub">Cruzamos {{notas}} notas fiscais eletrônicas e {{itens}} itens publicados no Portal da Transparência para achar o que merece uma segunda olhada.</p>
+  </div>
+  <div>
+    <div class="chave" id="chave"></div>
+    <p class="chave-note">Exemplo de chave de acesso de 44 dígitos. Os dois primeiros dizem <mark>25 (Paraíba)</mark>, mas o emitente está cadastrado no DF: esse é um dos {{r3_notas}} casos desse tipo encontrados na base.</p>
+  </div>
+</section>
+
+<!-- premissas -->
+<section class="slide" data-t="Premissas" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Premissas</span></div>
+  <h2>O que esta base mostra e o que ela não mostra</h2>
+  <dl class="prem">
+    <dt>Escopo</dt><dd>Notas fiscais eletrônicas de mercadorias (modelo 55) emitidas por fornecedores para órgãos do governo federal, quase todos do Poder Executivo, {{periodo}}.</dd>
+    <dt>Fora da base</dt><dd>Compras de estados e municípios, e serviços (limpeza, vigilância, consultoria, obras), que são cobrados por nota fiscal de serviço municipal.</dd>
+    <dt>Nota não é pagamento</dt><dd>A nota mostra o que o fornecedor faturou. Não confirma empenho, entrega nem pagamento, que estão nos dados de despesa do portal.</dd>
+    <dt>Uma linha, uma nota</dt><dd>No arquivo de notas, cada linha é uma nota fiscal: {{notas}} depois de remover as duplicadas. Destas, {{sem_info}} vêm com órgão "Sem informação".</dd>
+    <dt>Item é linha de produto</dt><dd>Os {{itens}} itens são as linhas de produto dentro das notas (média de {{itens_nota}} por nota), não a quantidade comprada. As unidades são misturadas (caixa, kg, litro), por isso as quantidades não são somadas.</dd>
+    <dt>Valor × soma dos itens</dt><dd>Valor da nota é o total do cabeçalho. Soma dos itens é a soma do valor total de cada linha de produto da mesma nota.</dd>
+  </dl>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-t="A base analisada" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>A base analisada</span></div>
+  <h2>{{valor_total}} em compras federais, nota por nota</h2>
+  <div class="grid2">
+    <div class="col">
+      <div class="kpis">
+        <div class="kpi big"><div class="v">{{valor_total}}</div><div class="l">valor somado das NF-e emitidas para órgãos federais, {{periodo}}</div></div>
+        <div class="kpi"><div class="v">{{notas_curto}}</div><div class="l">notas únicas</div></div>
+        <div class="kpi"><div class="v">{{itens_curto}}</div><div class="l">itens de produto</div></div>
+        <div class="kpi"><div class="v">{{fornecedores_curto}}</div><div class="l">fornecedores (CPF/CNPJ)</div></div>
+        <div class="kpi"><div class="v">{{orgaos}}</div><div class="l">órgãos destinatários</div></div>
+        <div class="kpi"><div class="v">{{ticket}}</div><div class="l">valor mediano por nota</div></div>
+        <div class="kpi"><div class="v">{{n_meses}}</div><div class="l">competências mensais</div></div>
+      </div>
+      <div class="note"><strong>Nota sinalizada:</strong> nota que caiu em pelo menos uma checagem de divergência (valor da nota × soma dos itens, preço unitário fora da curva, chave de acesso, CFOP, datas, duplicidade ou publicação incompleta). Indica que a nota precisa ser conferida, não que é irregular.</div>
+    </div>
+    <div class="col">
+      <p class="eyebrow">Antes de procurar erro nos fornecedores</p>
+      <p class="lede">O próprio arquivo público tinha repetições. Limpamos isso primeiro, para não acusar ninguém por um erro de publicação.</p>
+      <div class="note"><strong>{{dup_notas}} linhas de nota</strong> e <strong>{{dup_itens}} linhas de item</strong> aparecem duplicadas, idênticas, nos CSVs mensais. Foram removidas antes de qualquer cálculo. Sem isso, a soma dos itens dobraria e milhares de notas seriam sinalizadas por engano.</div>
+      <div class="note">CPFs de emitentes chegam mascarados pelo portal (<span class="mono">***.123.456-**</span>). Nesta apresentação eles continuam mascarados.</div>
+      <p class="small">Fonte: Portal da Transparência, Notas Fiscais Eletrônicas (modelo 55), arquivos {{arquivos}}. Processamento em Python (pandas), script <span class="mono">tratar_nfs.py</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-t="Produção por UF" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Produção estadual</span></div>
+  <h2>São Paulo e Rio de Janeiro emitem {{pct_sp_rj}} do valor vendido à União</h2>
+  <div class="gmap">
+    <div class="mapwrap" id="map1"></div>
+    <div class="col">
+      <div class="seg-ctl" role="group" aria-label="Métrica do mapa">
+        <button type="button" id="m1-emit" aria-pressed="true">Onde a nota é emitida</button>
+        <button type="button" id="m1-dest" aria-pressed="false">Para onde a nota vai</button>
+      </div>
+      <p class="lede" id="m1-text" style="font-size:16px"></p>
+      <div class="bars" id="m1-bars" style="--lw:34px;--vw:150px"></div>
+      <p class="small">Valor = soma do campo "Valor Nota Fiscal". Passe o mouse sobre um estado para ver notas, fornecedores e taxa de sinalização.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-t="Fluxos entre estados" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Quem vende para quem</span></div>
+  <h2>O Espírito Santo recebe {{es_dest}} em notas, mas emite só {{es_emit}}</h2>
+  <div class="grid2">
+    <div class="col">
+      <p class="eyebrow">Maiores fluxos interestaduais · origem → destino</p>
+      <div class="bars" id="fluxos" style="--lw:76px;--vw:110px"></div>
+    </div>
+    <div class="col">
+      <p class="eyebrow">Quanto da produção de cada UF sai do estado</p>
+      <div class="bars" id="inter" style="--lw:34px;--vw:56px"></div>
+      <p class="small">Estados com ao menos R$ 1 bilhão emitido. Percentual do número de notas com UF do destinatário diferente da UF do emitente.</p>
+      <div class="note">Destinos como ES e DF concentram notas de órgãos com almoxarifado ou sede administrativa central. O valor de "destino" mostra onde o órgão comprador está registrado, não onde o produto foi consumido.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-t="Mês a mês" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Evolução mensal</span></div>
+  <h2>{{mes_pico}} concentrou {{valor_pico}}, o dobro de um mês típico</h2>
+  <div class="col" style="gap:14px">
+    <svg class="chart" id="mensal" viewBox="0 0 1150 380" role="img" aria-label="Valor das notas por mês, em bilhões de reais"></svg>
+    <p class="small"><b>Barras:</b> valor total das notas emitidas no mês, em R$ bilhões. <b>Linha de baixo:</b> percentual das notas do mês que foram sinalizadas, estável entre {{div_min}} e {{div_max}}. O pico de março é de valor, não de mais notas com divergência.</p>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- 9 -->
+<section class="slide" data-t="Preços atípicos" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Preço unitário fora da curva</span></div>
+  <h2>Um tripé de <mark>{{tripe}}</mark> entre {{r9_itens}} itens com preço dez vezes acima do comum</h2>
+  <div class="tbl-wrap">
+    <table id="r9">
+      <thead><tr><th>Item · emitente</th><th>Órgão</th><th class="n">Qtd</th><th class="n">Unitário</th><th class="n">Mediana similar</th><th class="n">×</th><th class="n">Excesso estimado</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="small" style="margin-top:12px">Item comparado com a mediana de itens do mesmo NCM, mesma unidade e mesma palavra inicial da descrição (mínimo de 30 itens). Excesso somado dos {{r9_itens}} itens: {{r9_excesso}}. Parte provavelmente é erro de unidade (caixa lançada como comprimido) ou de digitação, que também precisa ser corrigido na fonte.</p>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-t="Nota menor que os itens" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Valor da nota × soma dos itens</span></div>
+  <h2>Notas de R$ 150 milhões cujos itens somam mais que o dobro</h2>
+  <div class="tbl-wrap">
+    <table id="r1">
+      <thead><tr><th>Emitente</th><th>Órgão</th><th>Emissão</th><th class="n">Valor da nota</th><th class="n">Soma dos itens</th><th class="n">Razão</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div style="margin-top:16px;max-width:860px">
+    <div class="note">Os maiores casos são medicamentos de alto custo para o Ministério da Saúde. Os dois descontos legais explicam uma razão de até cerca de 0,64 (próximo slide). Razões de 0,13 a 0,42 pedem o contrato e o empenho para conferir.</div>
+  </div>
+</section>
+
+<!-- descontos -->
+<section class="slide" data-t="ICMS e CAP" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Descontos legais em medicamentos</span></div>
+  <h2>Desoneração de ICMS e desconto CAP explicam uma nota até cerca de 36% menor que os itens</h2>
+  <div class="desc">
+    <div>
+      <p class="eyebrow">Imposto estadual</p>
+      <h3>Desoneração de ICMS</h3>
+      <p>O Convênio ICMS 87/2002 isenta de ICMS os medicamentos de uma lista anexa vendidos a órgãos da administração pública direta e indireta, federal, estadual e municipal.</p>
+      <p>O valor do imposto dispensado precisa ser deduzido do preço e demonstrado na nota fiscal (§ 6º). Na prática, sai como desconto do tamanho da alíquota de ICMS, que varia por estado e por tipo de operação.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Regra da CMED</p>
+      <h3>Desconto CAP</h3>
+      <p>O Coeficiente de Adequação de Preço é um desconto mínimo obrigatório sobre o Preço Fábrica na venda ao governo de medicamentos de uma lista da CMED. O resultado é o Preço Máximo de Venda ao Governo: PMVG = Preço Fábrica × (1 − CAP).</p>
+      <p>Foi de 21,53% até 23/09/2026 e passou a 19,79% a partir de 24/09/2026 (Resolução CTE-CMED nº 1/2026).</p>
+    </div>
+  </div>
+  <div class="conta" aria-label="Exemplo ilustrativo">
+    <div class="c"><b>R$ 100,00</b><span>item a Preço Fábrica</span></div><div class="ar">→</div>
+    <div class="c"><b>R$ 78,47</b><span>após CAP de 21,53%</span></div><div class="ar">→</div>
+    <div class="c"><b>R$ 64,35</b><span>após desonerar ICMS de 18%</span></div><div class="ar">=</div>
+    <div class="c res"><b>0,64</b><span>razão nota ÷ itens</span></div>
+  </div>
+  <p class="small" style="margin-top:14px">Exemplo ilustrativo com ICMS de 18%. Os descontos só aparecem como diferença entre nota e itens quando os itens vêm lançados a preço cheio e o desconto entra no total. Os casos do slide anterior (0,13 a 0,42) ficam bem abaixo desse limite.</p>
+</section>
+
+
+
+
+<!-- 12 -->
+<section class="slide" data-t="Órgãos compradores" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Quem compra</span></div>
+  <h2>Saúde concentra metade do valor; Desenvolvimento Social, a maior taxa de sinalização</h2>
+  <div class="grid2">
+    <div class="col">
+      <p class="eyebrow">Valor das notas por órgão superior</p>
+      <div class="bars" id="org-valor" style="--lw:190px;--vw:96px"></div>
+    </div>
+    <div class="col">
+      <p class="eyebrow">% de notas sinalizadas no órgão</p>
+      <div class="bars" id="org-taxa" style="--lw:190px;--vw:96px"></div>
+      <p class="small">Mesmos dez órgãos superiores, ordenados pela taxa de notas com ao menos uma regra.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- 15 -->
+<section class="slide closing" data-t="Encerramento" hidden>
+  <div class="slide-top"><span class="brand">Contraprova</span><span>Observatório cidadão de compras públicas</span></div>
+  <div></div>
+  <div style="align-self:end;display:flex;flex-direction:column;gap:22px">
+    <h1>Toda nota pública merece uma <mark>contraprova</mark>.</h1>
+    <p class="lede">{{notas}} notas lidas. {{div_notas}} separadas para verificação. {{r9_itens}} preços para explicar.</p>
+    <p class="small">Contraprova é uma organização fictícia criada para este estudo. Dados públicos do Portal da Transparência (NF-e destinadas a órgãos do Poder Executivo Federal), {{periodo}}. Sinalizações são indícios estatísticos e de consistência, sujeitos a verificação.</p>
+  </div>
+</section>
+
+</div></div>
+
+<nav class="nav" aria-label="Navegação dos slides">
+  <button type="button" id="prev" aria-label="Slide anterior">← Anterior</button>
+  <span id="count" class="num">1 / 11</span>
+  <div class="progress"><span id="bar"></span></div>
+  <span class="ttl" id="ttl"></span>
+  <button type="button" id="next" aria-label="Próximo slide">Próximo →</button>
+</nav>
+<div id="tip" hidden></div>
+
+<script>
+const D = /*__DATA__*/null;
+const MAPA = /*__MAPA__*/null;
+
+/* ---------- formatação ---------- */
+const nf0 = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 0 });
+const nf1 = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const nf2 = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function brl(v) {
+  const a = Math.abs(v);
+  if (a >= 1e9) return "R$ " + nf2.format(v / 1e9) + " bi";
+  if (a >= 1e6) return "R$ " + nf1.format(v / 1e6) + " mi";
+  if (a >= 1e3) return "R$ " + nf1.format(v / 1e3) + " mil";
+  return "R$ " + nf2.format(v);
+}
+const brlFull = v => "R$ " + nf2.format(v);
+const pct = (v, d = 1) => (d === 1 ? nf1 : nf0).format(v * 100) + "%";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const NOMES = { AC:"Acre", AL:"Alagoas", AP:"Amapá", AM:"Amazonas", BA:"Bahia", CE:"Ceará", DF:"Distrito Federal", ES:"Espírito Santo", GO:"Goiás", MA:"Maranhão", MT:"Mato Grosso", MS:"Mato Grosso do Sul", MG:"Minas Gerais", PA:"Pará", PB:"Paraíba", PR:"Paraná", PE:"Pernambuco", PI:"Piauí", RJ:"Rio de Janeiro", RN:"Rio Grande do Norte", RS:"Rio Grande do Sul", RO:"Rondônia", RR:"Roraima", SC:"Santa Catarina", SP:"São Paulo", SE:"Sergipe", TO:"Tocantins" };
+const MESES = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+const UF = Object.fromEntries(D.por_uf.map(u => [u.uf, u]));
+
+/* ---------- tooltip ---------- */
+const tip = document.getElementById("tip");
+document.addEventListener("pointermove", e => {
+  const t = e.target.closest && e.target.closest("[data-tip]");
+  if (!t) { tip.hidden = true; return; }
+  tip.innerHTML = t.getAttribute("data-tip");
+  tip.hidden = false;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+});
+document.addEventListener("pointerleave", () => { tip.hidden = true; });
+
+/* ---------- barras ---------- */
+function bars(el, rows, opt = {}) {
+  const max = opt.max || Math.max(...rows.map(r => r.v));
+  el.innerHTML = rows.map(r => `<div class="bar-row" data-tip="${esc(r.tip || "")}">
+    <span class="bl" title="${esc(r.full || r.l)}">${esc(r.l)}</span>
+    <span class="track"><span class="fill ${r.cls || opt.cls || ""}" style="width:${Math.max(0.4, r.v / max * 100)}%"></span></span>
+    <span class="bv">${esc(r.fmt)}</span></div>`).join("");
+}
+
+/* ---------- capa: chave de acesso ---------- */
+(function chave() {
+  const parts = [["25","UF"],["2603","Ano/mês"],["11222333000181","CNPJ do emitente"],["55","Mod."],["001","Série"],["000004812","Número"],["1","Tipo"],["70531964","Código numérico"]];
+  const base = parts.map(p => p[0]).join("");
+  let soma = 0;
+  for (let i = base.length - 1, w = 2; i >= 0; i--, w = w === 9 ? 2 : w + 1) soma += +base[i] * w;
+  let dv = 11 - (soma % 11); if (dv >= 10) dv = 0;
+  parts.push([String(dv), "DV"]);
+  document.getElementById("chave").innerHTML = parts.map((p, i) =>
+    `<div class="seg${i === 0 ? " on" : ""}"><b>${p[0]}</b><span>${p[1]}</span></div>`).join("");
+})();
+
+/* ---------- mapas ---------- */
+function mapa(el, metric, breaks, labels, fmt) {
+  const cls = v => { let i = 0; while (i < breaks.length && v >= breaks[i]) i++; return i; };
+  let html = `<svg viewBox="0 0 ${MAPA.w} ${MAPA.h}" role="img" aria-label="Mapa do Brasil por UF">`;
+  let txt = "";
+  for (const [uf, g] of Object.entries(MAPA.ufs)) {
+    const u = UF[uf]; const v = u[metric]; const c = cls(v);
+    const t = `<b>${NOMES[uf]} (${uf})</b><br>${fmt(v)}<br><span class="tm">Emitido: ${brl(u.valor_emit)} · ${nf0.format(u.notas_emit)} notas</span><br><span class="tm">Destino: ${brl(u.valor_dest)}</span><br><span class="tm">Fornecedores: ${nf0.format(u.fornecedores)} · Sinalizadas: ${pct(u.taxa_div)}</span>`;
+    html += `<path d="${g.d}" style="fill:var(--q${c})" data-tip="${esc(t)}" data-uf="${uf}"></path>`;
+    const small = ["SE","AL","PB","RN","PE","DF","ES","RJ","SC"].includes(uf);
+    const dx = { DF: 0, ES: 18, RJ: 10, SE: 16, AL: 20, PB: 26, RN: 22, PE: 0, SC: 0 }[uf] || 0;
+    const dy = { PE: 0, AL: 4, SE: 6 }[uf] || 0;
+    txt += `<text x="${g.cx + dx}" y="${g.cy + dy}" style="fill:${c >= 3 ? "var(--on-fill)" : "var(--ink)"};font-size:${small ? 9 : 11}px">${uf}</text>`;
+  }
+  html += txt + "</svg>";
+  html += `<div class="legend">${labels.map((l, i) => `<span><i style="background:var(--q${i})"></i>${l}</span>`).join("")}</div>`;
+  el.innerHTML = html;
+}
+const BR_VAL = [1e8, 3e8, 1e9, 3e9, 1e10];
+const LB_VAL = ["< 100 mi", "100–300 mi", "300 mi–1 bi", "1–3 bi", "3–10 bi", "> 10 bi"];
+
+function slide3(metric) {
+  mapa(document.getElementById("map1"), metric, BR_VAL, LB_VAL, v => brl(v));
+  const rows = [...D.por_uf].sort((a, b) => b[metric] - a[metric]).slice(0, 12);
+  const tot = D.totais.valor;
+  bars(document.getElementById("m1-bars"), rows.map(u => ({
+    l: u.uf, full: NOMES[u.uf], v: u[metric], fmt: `${brl(u[metric])} · ${pct(u[metric] / tot, 0)}`,
+    tip: `<b>${NOMES[u.uf]}</b><br>${brl(u[metric])} (${pct(u[metric] / tot)})`
+  })));
+  const top = rows[0];
+  document.getElementById("m1-text").innerHTML = metric === "valor_emit"
+    ? `Fornecedores sediados em <b>${NOMES[top.uf]}</b> emitiram ${brl(top.valor_emit)}. Os 12 primeiros estados somam ${pct(rows.reduce((s, u) => s + u.valor_emit, 0) / tot, 0)} do total.`
+    : `Pelo destino, <b>${NOMES[top.uf]}</b> lidera com ${brl(top.valor_dest)}. Espírito Santo e Distrito Federal sobem porque concentram órgãos compradores centrais.`;
+  document.getElementById("m1-emit").setAttribute("aria-pressed", metric === "valor_emit");
+  document.getElementById("m1-dest").setAttribute("aria-pressed", metric === "valor_dest");
+}
+slide3("valor_emit");
+document.getElementById("m1-emit").onclick = () => slide3("valor_emit");
+document.getElementById("m1-dest").onclick = () => slide3("valor_dest");
+
+
+
+/* ---------- fluxos ---------- */
+bars(document.getElementById("fluxos"), D.fluxo.slice(0, 10).map(f => ({
+  l: `${f.uf_emit} → ${f.uf_dest}`, v: f.valor, fmt: brl(f.valor),
+  tip: `<b>${NOMES[f.uf_emit]} → ${NOMES[f.uf_dest]}</b><br>${brl(f.valor)}`
+})));
+bars(document.getElementById("inter"), D.por_uf.filter(u => u.valor_emit >= 1e9).sort((a, b) => b.interestadual_pct - a.interestadual_pct).map(u => ({
+  l: u.uf, full: NOMES[u.uf], v: u.interestadual_pct, fmt: pct(u.interestadual_pct, 0),
+  tip: `<b>${NOMES[u.uf]}</b><br>${pct(u.interestadual_pct)} das notas vão para outra UF`
+})), { max: 1 });
+
+/* ---------- mensal ---------- */
+(function mensal() {
+  const svg = document.getElementById("mensal");
+  const W = 1150, H = 380, L = 56, R = 10, T = 16, B = 96;
+  const ms = D.mensal, n = ms.length;
+  const max = 14e9, ticks = [0, 4e9, 8e9, 12e9];
+  const y = v => T + (H - T - B) * (1 - v / max);
+  const bw = (W - L - R) / n, w = Math.min(64, bw * 0.56);
+  let s = ticks.map(t => `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"></line><text class="axis" x="${L - 10}" y="${y(t) + 4}" text-anchor="end">${t / 1e9}</text>`).join("");
+  s += `<text class="axis" x="${L - 10}" y="${T - 4}" text-anchor="end">R$ bi</text>`;
+  const imax = ms.reduce((m, r, i) => r.valor > ms[m].valor ? i : m, 0);
+  ms.forEach((r, i) => {
+    const cx = L + bw * i + bw / 2, x = cx - w / 2, yy = y(r.valor), h = y(0) - yy;
+    const mes = MESES[+r.competencia.slice(4) - 1] + "/" + r.competencia.slice(2, 4);
+    const t = `<b>${mes}</b><br><span class="tm">${brl(r.valor)} · ${nf0.format(r.notas)} notas</span><br><span class="tm">${nf0.format(r.divergentes)} sinalizadas (${pct(r.divergentes / r.notas)})</span>`;
+    s += `<g class="col" data-tip="${esc(t)}"><rect class="hit" x="${cx - bw / 2}" y="${T}" width="${bw}" height="${H - T}"></rect>
+      <path class="b" d="M${x},${y(0)}V${yy + 4}Q${x},${yy} ${x + 4},${yy}H${x + w - 4}Q${x + w},${yy} ${x + w},${yy + 4}V${y(0)}Z" style="fill:${i === imax ? "var(--petrol)" : "var(--q2)"}"></path>
+      ${i === imax ? `<text class="lbl" x="${cx}" y="${yy - 8}" text-anchor="middle">${brl(r.valor)}</text>` : ""}
+      <text class="axis" x="${cx}" y="${y(0) + 18}" text-anchor="middle">${mes}</text>
+      <text class="lbl2" x="${cx}" y="${y(0) + 58}" text-anchor="middle">${pct(r.divergentes / r.notas)}</text></g>`;
+  });
+  s += `<line class="base" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"></line>`;
+  s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(0) + 36}" y2="${y(0) + 36}"></line><text class="axis" x="${L - 10}" y="${y(0) + 62}" text-anchor="end">% sinal.</text>`;
+  svg.innerHTML = s;
+})();
+
+
+
+
+
+/* ---------- R9 ---------- */
+document.querySelector("#r9 tbody").innerHTML = D.top_r9.slice(0, 6).map(r => `<tr>
+  <td>${esc(r.produto)}<span class="sub2">${esc(r.emitente)} · ${r.uf}${r.notas > 1 ? ` · ${r.notas} notas` : ""}</span></td>
+  <td>${esc(r.orgao)}</td>
+  <td class="n num">${nf0.format(r.qtd)} ${esc(r.unid.slice(0, 5).toLowerCase())}</td>
+  <td class="n num">${brlFull(r.vunit)}</td>
+  <td class="n num">${brlFull(r.mediana)}</td>
+  <td class="n num"><span class="chip alert">${nf0.format(r.razao)}×</span></td>
+  <td class="n num">${brl(r.excesso)}</td></tr>`).join("");
+
+/* ---------- R1 ---------- */
+document.querySelector("#r1 tbody").innerHTML = D.top_r1.slice(0, 6).map(r => `<tr>
+  <td>${esc(r.emitente)}<span class="sub2">${r.uf} · nota nº ${esc(r.numero)}</span></td>
+  <td>${esc(r.orgao)}</td><td class="num">${r.data}</td>
+  <td class="n num">${brl(r.valor)}</td><td class="n num">${brl(r.soma_itens)}</td>
+  <td class="n num"><span class="chip alert">${nf2.format(r.valor / r.soma_itens)}</span></td></tr>`).join("");
+
+
+
+/* ---------- órgãos ---------- */
+(function orgaos() {
+  const curto = s => s.replace("Ministério da ", "").replace("Ministério do ", "").replace("Ministério das ", "").replace("Ministério de ", "")
+    .replace("Desenvolvimento e Assistência Social, Família e Combate à Fome", "Desenvolvimento Social").replace("Integração e do Desenvolvimento Regional", "Integração Regional")
+    .replace("Meio Ambiente e Mudança do Clima", "Meio Ambiente").replace("Justiça e Segurança Pública", "Justiça e Seg. Pública").replace("Agricultura e Pecuária", "Agricultura");
+  const os = D.orgaos;
+  const tip = o => `<b>${esc(o.orgao_sup)}</b><br><span class="tm">${brl(o.valor)} · ${nf0.format(o.notas)} notas</span><br><span class="tm">${nf0.format(o.divergentes)} sinalizadas (${pct(o.divergentes / o.notas)})</span>`;
+  bars(document.getElementById("org-valor"), os.map(o => ({ l: curto(o.orgao_sup), full: o.orgao_sup, v: o.valor, fmt: brl(o.valor), tip: tip(o) })));
+  bars(document.getElementById("org-taxa"), [...os].sort((a, b) => b.divergentes / b.notas - a.divergentes / a.notas).map(o => ({
+    l: curto(o.orgao_sup), full: o.orgao_sup, v: o.divergentes / o.notas, fmt: pct(o.divergentes / o.notas), tip: tip(o) })), { cls: "alt" });
+})();
+
+/* ---------- fornecedores ---------- */
+
+
+/* ---------- navegação ---------- */
+const slides = [...document.querySelectorAll(".slide")];
+let cur = 0;
+function show(i) {
+  cur = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, k) => { s.hidden = k !== cur; });
+  document.getElementById("count").textContent = `${cur + 1} / ${slides.length}`;
+  document.getElementById("bar").style.width = ((cur + 1) / slides.length * 100) + "%";
+  document.getElementById("ttl").textContent = slides[cur].dataset.t;
+  document.getElementById("prev").disabled = cur === 0;
+  document.getElementById("next").disabled = cur === slides.length - 1;
+  const h = "#s" + (cur + 1);
+  if (location.hash !== h) { try { history.replaceState(null, "", h); } catch (e) {} }
+}
+function fit() {
+  const flow = innerWidth < 900 || innerHeight < 480;
+  document.body.classList.toggle("flow", flow);
+  if (!flow) {
+    const s = Math.min((innerWidth - 32) / 1280, (innerHeight - 72) / 720);
+    document.getElementById("stage").style.setProperty("--s", s.toFixed(4));
+  }
+}
+document.getElementById("prev").onclick = () => show(cur - 1);
+document.getElementById("next").onclick = () => show(cur + 1);
+document.addEventListener("keydown", e => {
+  if (document.body.classList.contains("flow")) return;
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+  if (e.key === "Home") show(0);
+  if (e.key === "End") show(slides.length - 1);
+});
+let tx = null;
+document.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+document.addEventListener("touchend", e => {
+  if (tx === null || document.body.classList.contains("flow")) return;
+  const dx = e.changedTouches[0].clientX - tx; tx = null;
+  if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
+});
+addEventListener("resize", fit);
+addEventListener("hashchange", () => { const m = location.hash.match(/^#s(\d+)$/); if (m) show(+m[1] - 1); });
+fit();
+const m0 = location.hash.match(/^#s(\d+)$/);
+show(m0 ? +m0[1] - 1 : 0);
+</script>

@@ -1,0 +1,12 @@
+# Arquivos brutos do Portal da Transparência (cerca de 450 MB compactados, 3,9 GB descompactados)
+dados_brutos/*
+!dados_brutos/LEIAME.md
+
+# Saídas intermediárias do ETL que não cabem no GitHub (o CSV completo vai compactado em dados/)
+saida/
+
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
