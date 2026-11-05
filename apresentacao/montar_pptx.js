@@ -185,7 +185,7 @@ const TD2 = (main, sub) => ({ text: [{ text: main, options: { fontSize: 12, colo
   pres.addSection({ title: "Premissas" });
   const s = pres.addSlide({ masterName: "CONTEUDO", sectionTitle: "Premissas" });
   rotulo(s, "Premissas");
-  s.addText("O que esta base mostra e o que ela não mostra", { placeholder: "title" });
+  s.addText("O que esta base mostra", { placeholder: "title" });
   const semInfo = (D.orgaos.find(o => o.orgao_sup === "Sem informação") || { notas: 0 }).notas;
   const linhas = [
     ["Escopo", `Notas fiscais eletrônicas de mercadorias (modelo 55) emitidas por fornecedores para órgãos do governo federal, quase todos do Poder Executivo, ${periodo}.`],

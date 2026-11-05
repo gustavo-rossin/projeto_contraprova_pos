@@ -171,6 +171,14 @@ body.flow .prem dt { border-bottom: 0; padding-bottom: 2px; }
 .conta .ar { align-self: center; font-family: var(--f-mono); color: var(--muted); font-size: 18px; }
 .conta .c.res b { color: var(--petrol); }
 body.flow .desc { grid-template-columns: 1fr; }
+.limpeza { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.limpeza summary { cursor: pointer; padding: 10px 0; font: 600 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--petrol); list-style: none; }
+.limpeza summary::-webkit-details-marker { display: none; }
+.limpeza summary::before { content: "+"; display: inline-block; width: 18px; font-weight: 600; }
+.limpeza[open] summary::before { content: "−"; }
+.limpeza summary:focus-visible { outline: 2px solid var(--petrol); outline-offset: 2px; }
+.limpeza-corpo { display: flex; flex-direction: column; gap: 8px; padding: 0 0 12px 18px; font-size: 13px; color: var(--ink-2); }
+.limpeza-corpo strong { color: var(--ink); }
 /* ---------- navegação ---------- */
 .nav {
   position: fixed; left: 0; right: 0; bottom: 0; height: calc(56px + env(safe-area-inset-bottom, 0px));
@@ -230,7 +238,7 @@ body.flow .cover { gap: 28px; }
 <!-- premissas -->
 <section class="slide" data-t="Premissas" hidden>
   <div class="slide-top"><span class="brand">Contraprova</span><span>Premissas</span></div>
-  <h2>O que esta base mostra e o que ela não mostra</h2>
+  <h2>O que esta base mostra</h2>
   <dl class="prem">
     <dt>Escopo</dt><dd>Notas fiscais eletrônicas de mercadorias (modelo 55) emitidas por fornecedores para órgãos do governo federal, quase todos do Poder Executivo, jan–out/2026.</dd>
     <dt>Fora da base</dt><dd>Compras de estados e municípios, e serviços (limpeza, vigilância, consultoria, obras), que são cobrados por nota fiscal de serviço municipal.</dd>
@@ -259,11 +267,15 @@ body.flow .cover { gap: 28px; }
       <div class="note"><strong>Nota sinalizada:</strong> nota que caiu em pelo menos uma checagem de divergência (valor da nota × soma dos itens, preço unitário fora da curva, chave de acesso, CFOP, datas, duplicidade ou publicação incompleta). Indica que a nota precisa ser conferida, não que é irregular.</div>
     </div>
     <div class="col">
-      <p class="eyebrow">Antes de procurar erro nos fornecedores</p>
-      <p class="lede">O próprio arquivo público tinha repetições. Limpamos isso primeiro, para não acusar ninguém por um erro de publicação.</p>
-      <div class="note"><strong>40.527 linhas de nota</strong> e <strong>157.674 linhas de item</strong> aparecem duplicadas, idênticas, nos CSVs mensais. Foram removidas antes de qualquer cálculo. Sem isso, a soma dos itens dobraria e milhares de notas seriam sinalizadas por engano.</div>
-      <div class="note">CPFs de emitentes chegam mascarados pelo portal (<span class="mono">***.123.456-**</span>). Nesta apresentação eles continuam mascarados.</div>
-      <p class="small">Fonte: Portal da Transparência, Notas Fiscais Eletrônicas (modelo 55), arquivos 202601 a 202610. Processamento em Python (pandas), script <span class="mono">tratar_nfs.py</span>.</p>
+      <details class="limpeza">
+        <summary>Como os dados foram limpos</summary>
+        <div class="limpeza-corpo">
+          <p>O próprio arquivo público tinha repetições. Limpamos isso primeiro, para não acusar ninguém por um erro de publicação.</p>
+          <p><strong>40.527 linhas de nota</strong> e <strong>157.674 linhas de item</strong> aparecem duplicadas, idênticas, nos CSVs mensais. Foram removidas antes de qualquer cálculo. Sem isso, a soma dos itens dobraria e milhares de notas seriam sinalizadas por engano.</p>
+          <p>CPFs de emitentes chegam mascarados pelo portal (<span class="mono">***.123.456-**</span>) e continuam mascarados nesta apresentação.</p>
+        </div>
+      </details>
+      <p class="small">Fonte: Portal da Transparência, Notas Fiscais Eletrônicas (modelo 55), arquivos 202601 a 202610.</p>
     </div>
   </div>
 </section>
