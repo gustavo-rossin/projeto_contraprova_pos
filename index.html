@@ -57,7 +57,7 @@ mark, .hl { background: linear-gradient(transparent 52%, var(--mark-soft) 52%, v
 .stage { width: 1280px; height: 720px; transform: scale(var(--s, 1)); transform-origin: center center; position: relative; flex: none; }
 .slide {
   position: absolute; inset: 0; background: var(--sheet); border: 1px solid var(--rule);
-  padding: 40px 64px 44px; display: grid; grid-template-rows: auto auto 1fr; gap: 0; overflow: hidden;
+  padding: 40px 64px 44px; display: grid; grid-template-rows: auto auto 1fr; gap: 0; overflow-x: hidden; overflow-y: auto; align-content: start;
 }
 .slide-top { display: flex; gap: 16px; justify-content: space-between; align-items: baseline; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-bottom: 14px; border-bottom: 1px solid var(--rule); margin-bottom: 26px; }
 .brand { color: var(--ink); font-weight: 600; letter-spacing: .14em; }
@@ -119,6 +119,8 @@ h2 { font-family: var(--f-display); font-variation-settings: "wdth" 88; font-wei
 
 /* ---------- tabelas ---------- */
 .tbl-wrap { overflow-x: auto; min-width: 0; }
+.slide.rolavel { display: flex; flex-direction: column; }
+.slide.rolavel > * { flex-shrink: 0; }
 table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
 th { text-align: left; font: 600 11px var(--f-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 0 10px 8px 0; border-bottom: 2px solid var(--ink); white-space: nowrap; }
 td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
@@ -179,6 +181,15 @@ body.flow .desc { grid-template-columns: 1fr; }
 .limpeza summary:focus-visible { outline: 2px solid var(--petrol); outline-offset: 2px; }
 .limpeza-corpo { display: flex; flex-direction: column; gap: 8px; padding: 0 0 12px 18px; font-size: 13px; color: var(--ink-2); }
 .limpeza-corpo strong { color: var(--ink); }
+.dds { margin-top: 14px; max-width: 980px; }
+.dds .limpeza + .limpeza { border-top: 0; }
+.limpeza .desc { gap: 16px; }
+.limpeza .desc > div { padding: 12px 16px; gap: 4px; }
+.limpeza .desc h3 { font-size: 16px; }
+.limpeza .desc p { font-size: 13px; }
+.limpeza .conta { margin-top: 6px; }
+.limpeza .conta .c b { font-size: 16px; }
+.limpeza .conta .c { min-width: 120px; }
 /* ---------- navegação ---------- */
 .nav {
   position: fixed; left: 0; right: 0; bottom: 0; height: calc(56px + env(safe-area-inset-bottom, 0px));
@@ -311,7 +322,12 @@ body.flow .cover { gap: 28px; }
       <p class="eyebrow">Quanto da produção de cada UF sai do estado</p>
       <div class="bars" id="inter" style="--lw:34px;--vw:56px"></div>
       <p class="small">Estados com ao menos R$ 1 bilhão emitido. Percentual do número de notas com UF do destinatário diferente da UF do emitente.</p>
-      <div class="note">Destinos como ES e DF concentram notas de órgãos com almoxarifado ou sede administrativa central. O valor de "destino" mostra onde o órgão comprador está registrado, não onde o produto foi consumido.</div>
+      <details class="limpeza">
+        <summary>Sobre o destino das notas</summary>
+        <div class="limpeza-corpo">
+          <p>Destinos como ES e DF concentram notas de órgãos com almoxarifado ou sede administrativa central. O valor de "destino" mostra onde o órgão comprador está registrado, não onde o produto foi consumido.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -333,7 +349,7 @@ body.flow .cover { gap: 28px; }
 
 
 <!-- 9 -->
-<section class="slide" data-t="Preços atípicos" hidden>
+<section class="slide rolavel" data-t="Preços atípicos" hidden>
   <div class="slide-top"><span class="brand">Contraprova</span><span>Preço unitário fora da curva</span></div>
   <h2>Um tripé de <mark>R$ 88,0 mi</mark> entre 14.254 itens com preço dez vezes acima do comum</h2>
   <div class="tbl-wrap">
@@ -342,11 +358,16 @@ body.flow .cover { gap: 28px; }
       <tbody></tbody>
     </table>
   </div>
-  <p class="small" style="margin-top:12px">Item comparado com a mediana de itens do mesmo NCM, mesma unidade e mesma palavra inicial da descrição (mínimo de 30 itens). Excesso somado dos 14.254 itens: R$ 2,08 bi. Parte provavelmente é erro de unidade (caixa lançada como comprimido) ou de digitação, que também precisa ser corrigido na fonte.</p>
+  <div style="margin-top:12px"><details class="limpeza">
+        <summary>Como o preço atípico foi calculado</summary>
+        <div class="limpeza-corpo">
+          <p>Item comparado com a mediana de itens do mesmo NCM, mesma unidade e mesma palavra inicial da descrição (mínimo de 30 itens). Excesso somado dos 14.254 itens: R$ 2,08 bi. Parte provavelmente é erro de unidade (caixa lançada como comprimido) ou de digitação, que também precisa ser corrigido na fonte.</p>
+        </div>
+      </details></div>
 </section>
 
 <!-- 10 -->
-<section class="slide" data-t="Nota menor que os itens" hidden>
+<section class="slide rolavel" data-t="Nota menor que os itens" hidden>
   <div class="slide-top"><span class="brand">Contraprova</span><span>Valor da nota × soma dos itens</span></div>
   <h2>Notas de R$ 150 milhões cujos itens somam mais que o dobro</h2>
   <div class="tbl-wrap">
@@ -355,37 +376,42 @@ body.flow .cover { gap: 28px; }
       <tbody></tbody>
     </table>
   </div>
-  <div style="margin-top:16px;max-width:860px">
-    <div class="note">Os maiores casos são medicamentos de alto custo para o Ministério da Saúde. Os dois descontos legais explicam uma razão de até cerca de 0,64 (próximo slide). Razões de 0,13 a 0,42 pedem o contrato e o empenho para conferir.</div>
+  <div class="dds">
+      <details class="limpeza">
+        <summary>Por que a nota é menor que os itens</summary>
+        <div class="limpeza-corpo">
+          <p>Os maiores casos são medicamentos de alto custo para o Ministério da Saúde. Os dois descontos legais explicam uma razão de até cerca de 0,64 (veja abaixo). Razões de 0,13 a 0,42 pedem o contrato e o empenho para conferir.</p>
+        </div>
+      </details>
+      <details class="limpeza">
+        <summary>Desoneração de ICMS e desconto CAP</summary>
+        <div class="limpeza-corpo">
+          <div class="desc">
+          <div>
+            <p class="eyebrow">Imposto estadual</p>
+            <h3>Desoneração de ICMS</h3>
+            <p>O Convênio ICMS 87/2002 isenta de ICMS os medicamentos de uma lista anexa vendidos a órgãos da administração pública direta e indireta, federal, estadual e municipal.</p>
+            <p>O valor do imposto dispensado precisa ser deduzido do preço e demonstrado na nota fiscal (§ 6º). Na prática, sai como desconto do tamanho da alíquota de ICMS, que varia por estado e por tipo de operação.</p>
+          </div>
+          <div>
+            <p class="eyebrow">Regra da CMED</p>
+            <h3>Desconto CAP</h3>
+            <p>O Coeficiente de Adequação de Preço é um desconto mínimo obrigatório sobre o Preço Fábrica na venda ao governo de medicamentos de uma lista da CMED. O resultado é o Preço Máximo de Venda ao Governo: PMVG = Preço Fábrica × (1 − CAP).</p>
+            <p>Foi de 21,53% até 23/09/2026 e passou a 19,79% a partir de 24/09/2026 (Resolução CTE-CMED nº 1/2026).</p>
+          </div>
+        </div>
+        <div class="conta" aria-label="Exemplo ilustrativo">
+          <div class="c"><b>R$ 100,00</b><span>item a Preço Fábrica</span></div><div class="ar">→</div>
+          <div class="c"><b>R$ 78,47</b><span>após CAP de 21,53%</span></div><div class="ar">→</div>
+          <div class="c"><b>R$ 64,35</b><span>após desonerar ICMS de 18%</span></div><div class="ar">=</div>
+          <div class="c res"><b>0,64</b><span>razão nota ÷ itens</span></div>
+        </div>
+          <p >Exemplo ilustrativo com ICMS de 18%. Os descontos só aparecem como diferença entre nota e itens quando os itens vêm lançados a preço cheio e o desconto entra no total. Os casos da tabela (0,13 a 0,42) ficam bem abaixo desse limite.</p>
+        </div>
+      </details>
   </div>
 </section>
 
-<!-- descontos -->
-<section class="slide" data-t="ICMS e CAP" hidden>
-  <div class="slide-top"><span class="brand">Contraprova</span><span>Descontos legais em medicamentos</span></div>
-  <h2>Desoneração de ICMS e desconto CAP explicam uma nota até cerca de 36% menor que os itens</h2>
-  <div class="desc">
-    <div>
-      <p class="eyebrow">Imposto estadual</p>
-      <h3>Desoneração de ICMS</h3>
-      <p>O Convênio ICMS 87/2002 isenta de ICMS os medicamentos de uma lista anexa vendidos a órgãos da administração pública direta e indireta, federal, estadual e municipal.</p>
-      <p>O valor do imposto dispensado precisa ser deduzido do preço e demonstrado na nota fiscal (§ 6º). Na prática, sai como desconto do tamanho da alíquota de ICMS, que varia por estado e por tipo de operação.</p>
-    </div>
-    <div>
-      <p class="eyebrow">Regra da CMED</p>
-      <h3>Desconto CAP</h3>
-      <p>O Coeficiente de Adequação de Preço é um desconto mínimo obrigatório sobre o Preço Fábrica na venda ao governo de medicamentos de uma lista da CMED. O resultado é o Preço Máximo de Venda ao Governo: PMVG = Preço Fábrica × (1 − CAP).</p>
-      <p>Foi de 21,53% até 23/09/2026 e passou a 19,79% a partir de 24/09/2026 (Resolução CTE-CMED nº 1/2026).</p>
-    </div>
-  </div>
-  <div class="conta" aria-label="Exemplo ilustrativo">
-    <div class="c"><b>R$ 100,00</b><span>item a Preço Fábrica</span></div><div class="ar">→</div>
-    <div class="c"><b>R$ 78,47</b><span>após CAP de 21,53%</span></div><div class="ar">→</div>
-    <div class="c"><b>R$ 64,35</b><span>após desonerar ICMS de 18%</span></div><div class="ar">=</div>
-    <div class="c res"><b>0,64</b><span>razão nota ÷ itens</span></div>
-  </div>
-  <p class="small" style="margin-top:14px">Exemplo ilustrativo com ICMS de 18%. Os descontos só aparecem como diferença entre nota e itens quando os itens vêm lançados a preço cheio e o desconto entra no total. Os casos do slide anterior (0,13 a 0,42) ficam bem abaixo desse limite.</p>
-</section>
 
 
 
@@ -424,7 +450,7 @@ body.flow .cover { gap: 28px; }
 
 <nav class="nav" aria-label="Navegação dos slides">
   <button type="button" id="prev" aria-label="Slide anterior">← Anterior</button>
-  <span id="count" class="num">1 / 11</span>
+  <span id="count" class="num">1 / 10</span>
   <div class="progress"><span id="bar"></span></div>
   <span class="ttl" id="ttl"></span>
   <button type="button" id="next" aria-label="Próximo slide">Próximo →</button>
