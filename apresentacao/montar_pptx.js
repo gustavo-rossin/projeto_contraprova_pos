@@ -1,5 +1,5 @@
 // Gera a versão PowerPoint da apresentação Contraprova a partir de resumo.json e mapa.json.
-// Uso: node apresentacao/montar_pptx.js dados/resumo.json dados/mapa.json apresentacao/contraprova_nfe.pptx
+// Uso: node apresentacao/montar_pptx.js dados/resumo.json dados/mapa.json apresentacao/<saida>.pptx
 const fs = require("fs");
 const path = require("path");
 const pptxgen = require("pptxgenjs");
@@ -386,7 +386,6 @@ pres.addSection({ title: "Produção estadual" });
   barras(s, ot.map(o => curto(o.orgao_sup)), ot.map(o => o.divergentes / o.notas), { name: "% sinalizadas por órgão", x: X2 - 0.1, y: 2.5, w: W2 + 0.1, h: 4.3, fmt: "0.0%", max: 0.24, color: HEX.alert });
 }
 
-// 11. (próximos passos removido)
 pres.addSection({ title: "Encerramento" });
 
 // 12. Encerramento
